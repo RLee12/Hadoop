@@ -1,7 +1,8 @@
 # Count the number of names in the dataset. A name has the following properties:
 # 1. The first character is not a digit
 # 2. The first letter is uppercase, and all the other letters are lowercase
-# 3. When this word appears in the dataset regardless of its case (i.e. the first letter is not necessarily upper case) and condition (2) is not met, the occurrence of such case is less than 0.5%
+# 3. When this word appears in the dataset regardless of its case (i.e. the first letter is not necessarily upper case) 
+# and condition (2) is not met, the occurrence of such case is less than 0.5%
 
 import sys
 
