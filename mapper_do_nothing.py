@@ -1,3 +1,4 @@
+# This mapper serves as a pass-through program.
 
 import sys
 
