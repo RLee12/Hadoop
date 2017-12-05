@@ -1,0 +1,27 @@
+OUT_DIR="wordcount_result_"$(date +"%s%6N")
+NUM_REDUCERS=8
+
+yarn jar /opt/cloudera/parcels/CDH/lib/hadoop-mapreduce/hadoop-streaming.jar \
+    -D stream.map.output.field.separator=" " \
+    -D stream.num.map.output.key.fields=2 \
+    -D mapred.jab.name="Streaming wordCount" \
+    -D mapreduce.job.reduces=${NUM_REDUCERS} \
+    -files mapper.py,reducer.py,/datasets/stop_words_en.txt \
+    -mapper "python mapper.py" \
+    -reducer "python reducer.py" \
+    -input /data/wiki/en_articles_part \
+    -output ${OUT_DIR} > /dev/null
+    
+OUT_DIR2="wordcount_final_"$(date +"%s%6N")
+NUM_REDUCERS=1
+
+yarn jar /opt/cloudera/parcels/CDH/lib/hadoop-mapreduce/hadoop-streaming.jar \
+    -D mapred.jab.name="Streaming wordCount" \
+    -D mapreduce.job.reduces=${NUM_REDUCERS} \
+    -files mapper2.py,reducer2.py \
+    -mapper "python mapper2.py" \
+    -reducer "python reducer2.py" \
+    -input ${OUT_DIR}/part-* \
+    -output ${OUT_DIR2} > /dev/null
+
+hdfs dfs -cat ${OUT_DIR2}/part-00000 | grep -w "english" | sort -k1nr | head -1
