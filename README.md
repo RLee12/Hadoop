@@ -13,7 +13,7 @@ Calculate statistics for groups of words that are equal up to permutations of le
 
 Output: count of occurrences for the group of words, number of unique words in the group, comma-separated list of the words in the group in lexicographical order:
 
-sum <tab> group size <tab> word1,word2,...
+sum \<tab\> group size \<tab\> word1,word2,...
 
 Example: assume ‘emit’ occurred 3 times, 'item' -- 2 times, 'time' -- 5 times; 3 + 2 + 5 = 10, group contains 3 words, so for this group result is:
 
