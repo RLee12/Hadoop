@@ -10,9 +10,14 @@ for line in sys.stdin:
     if current_length != length:
         if current_length:
             if len(word_group) > 1:
+                
+                # Sum the counts of all words in this group, 
+                # find number of words in this group,
+                # and concatenate them by comma.
                 print "%d\t%d\t%s" % (sum([x[1] for x in sorted(word_group)]), 
                                       len(word_group), 
                                       ",".join([x[0] for x in sorted(word_group)]))
+                
         current_length = length
         word_group = []
     word_group.append((word, count))
